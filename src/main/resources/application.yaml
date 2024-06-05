@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: bookstore
+
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/mydatabase?currentSchema=bookstore'
+    username: 'postgres'
+    password: 'password'
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+server:
+  port: 8080
+
