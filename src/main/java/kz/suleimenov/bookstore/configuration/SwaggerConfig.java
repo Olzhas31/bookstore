@@ -1,6 +1,7 @@
 package kz.suleimenov.bookstore.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +22,13 @@ public class SwaggerConfig {
   public OpenAPI customOpenAPI() {
     return new OpenAPI().info(
         new Info()
-            .title("API title")
-            .version("API version 1.0")
+            .title("Bookstore Service API")
+            .description("Bookstore Service API")
+            .contact(new Contact()
+                .name("Olzhas Suleimenov")
+                .email("suleimenov97@gmail.com")
+            )
+            .version("1.0")
     );
   }
 }

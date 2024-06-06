@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS bookstore.authors (
 
 -- Создание таблицы Authors_books (связь многие-ко-многим между Authors и Books)
 CREATE TABLE IF NOT EXISTS bookstore.authors_books (
-                               author_id INT,
-                               book_id INT,
+                               author_id BIGINT,
+                               book_id BIGINT,
                                FOREIGN KEY (author_id) REFERENCES bookstore.authors(id),
                                FOREIGN KEY (book_id) REFERENCES bookstore.books(id),
                                PRIMARY KEY (author_id, book_id)
@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS bookstore.categories (
 
 -- Создание таблицы Categories_books (связь многие-ко-многим между Categories и Books)
 CREATE TABLE IF NOT EXISTS bookstore.categories_books (
-                                  category_id INT,
-                                  book_id INT,
+                                  category_id BIGINT,
+                                  book_id BIGINT,
                                   FOREIGN KEY (category_id) REFERENCES bookstore.categories(id),
                                   FOREIGN KEY (book_id) REFERENCES bookstore.books(id),
                                   PRIMARY KEY (category_id, book_id)
@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS bookstore.tags (
 
 -- Создание таблицы Tags_books (связь многие-ко-многим между Tags и Books)
 CREATE TABLE IF NOT EXISTS bookstore.tags_books (
-                            tag_id INT,
-                            book_id INT,
+                            tag_id BIGINT,
+                            book_id BIGINT,
                             FOREIGN KEY (tag_id) REFERENCES bookstore.tags(id),
                             FOREIGN KEY (book_id) REFERENCES bookstore.books(id),
                             PRIMARY KEY (tag_id, book_id)

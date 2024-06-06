@@ -1,9 +1,10 @@
 package kz.suleimenov.bookstore.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import kz.suleimenov.bookstore.model.dtos.BookDto;
 import kz.suleimenov.bookstore.service.BookService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,21 +17,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
+@Tag(name = "books", description = "Books Service APIs")
 @RequestMapping(path = "/books")
 public class BookController {
 
+  private static final String SWAGGER_TAG = "books";
   private final BookService bookService;
 
-  // Получение всех книг
+  @Operation(summary = "Return all books",
+      description = "Get a list of all books available in the bookstore",
+      tags = {SWAGGER_TAG})
   @GetMapping
   public ResponseEntity<List<BookDto>> getAllBooks() {
     return ResponseEntity.ok(bookService.getAllBooks());
   }
 
-  // Получение книги по ID
+  @Operation(summary = "Return a book by id",
+      description = "Get the details of a specific book by its unique identifier",
+      tags = {SWAGGER_TAG})
   @GetMapping("/{id}")
   public ResponseEntity<BookDto> getBookById(@PathVariable("id") Long id) {
     BookDto book = bookService.getBookById(id);
@@ -41,14 +47,22 @@ public class BookController {
     }
   }
 
-  // Создание новой книги
+  @Operation(
+      summary = "Create a new book",
+      description = "Add a new book to the bookstore's collection by providing the necessary details",
+      tags = {SWAGGER_TAG}
+  )
   @PostMapping
   public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto) {
     BookDto newBook = bookService.createBook(bookDto);
     return new ResponseEntity<>(newBook, HttpStatus.CREATED);
   }
 
-  // Обновление существующей книги
+  @Operation(
+      summary = "Update an existing book",
+      description = "Update the details of an existing book by providing the book ID and the updated information",
+      tags = {SWAGGER_TAG}
+  )
   @PutMapping("/{id}")
   public ResponseEntity<BookDto> updateBook(@PathVariable("id") Long id, @RequestBody BookDto bookDto) {
     BookDto updatedBook = bookService.updateBook(id, bookDto);
@@ -59,7 +73,11 @@ public class BookController {
     }
   }
 
-  // Удаление книги по ID
+  @Operation(
+      summary = "Delete a book by ID",
+      description = "Remove a specific book from the bookstore by its unique identifier",
+      tags = {SWAGGER_TAG}
+  )
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteBook(@PathVariable("id") Long id) {
     boolean deleted = bookService.deleteBook(id);
